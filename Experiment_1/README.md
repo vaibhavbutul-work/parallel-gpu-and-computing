@@ -8,10 +8,10 @@
 **Problem Size:** 4000 × 4000 dense matrix multiplication ( $C = A \\times B$ )
 **Models Evaluated:** Sequential CPU · OpenMP (shared memory) · MPI (distributed memory) · CUDA (GPU SIMT)
 
-!\[Models](https://img.shields.io/badge/Models-Sequential%20%7C%20OpenMP%20%7C%20MPI%20%7C%20CUDA-1f2937)
-!\[Language](https://img.shields.io/badge/Language-C%20%2F%20CUDA%20C-2563eb)
-!\[Verification](https://img.shields.io/badge/Verification-C%5B0%5D%5B0%5D%20%3D%204000.00-16a34a)
-!\[Best Speedup](https://img.shields.io/badge/Best%20Speedup-3457x%20(CUDA)-ea580c)
+![Models](https://img.shields.io/badge/Models-Sequential%20%7C%20OpenMP%20%7C%20MPI%20%7C%20CUDA-1f2937)
+![Language](https://img.shields.io/badge/Language-C%20%2F%20CUDA%20C-2563eb)
+![Verification](https://img.shields.io/badge/Verification-C%5B0%5D%5B0%5D%20%3D%204000.00-16a34a)
+![Best Speedup](https://img.shields.io/badge/Best%20Speedup-3457x%20(CUDA)-ea580c)
 
 </div>
 
@@ -269,12 +269,12 @@ Verification C\[0]\[0] = 4000.00
 ### 7.6 Screenshots
 
 <p align="center">
-  <img src="SequentialModeling/Sequential_Setup.png" width="90%" alt="WSL verification and Ubuntu installation"><br>
+  ![WSL verification and Ubuntu installation](SequentialModeling/Sequential_Setup.png)<br>
   <em>Figure A.1 — WSL verification in PowerShell (<code>wsl --status</code>, <code>wsl -l -v</code>), Ubuntu installation and user creation.</em>
 </p>
 
 <p align="center">
-  <img src="SequentialModeling/Sequential_Result.png" width="90%" alt="Sequential compilation and result"><br>
+  ![Sequential compilation and result](SequentialModeling/Sequential_Result.png)<br>
   <em>Figure A.2 — <code>build-essential</code> installation, <code>gcc --version</code>, compilation, <code>ls -l</code> and final sequential output (266.477234 s).</em>
 </p>
 
@@ -361,12 +361,12 @@ Verification C\[0]\[0] = 4000.00
 ### 8.6 Screenshots
 
 <p align="center">
-  <img src="OpenMP/OpenMP.png" width="90%" alt="OpenMP environment setup"><br>
+  ![OpenMP environment setup](OpenMP/OpenMP.png)<br>
   <em>Figure B.1 — <code>wsl --status</code>, <code>wsl -l -v</code>, <code>nproc</code> (32), <code>OMP\_NUM\_THREADS=8</code> and compilation with <code>-fopenmp</code>.</em>
 </p>
 
 <p align="center">
-  <img src="OpenMP/OpenMP_matrixmul_result.png" width="90%" alt="OpenMP result"><br>
+  ![OpenMP result](OpenMP/OpenMP_matrixmul_result.png)<br>
   <em>Figure B.2 — OpenMP execution with 8 threads (41.021555 s, C\[0]\[0] = 4000.00).</em>
 </p>
 
@@ -505,17 +505,17 @@ Verification C\[0]\[0] = 4000.00
 ### 9.7 Screenshots
 
 <p align="center">
-  <img src="MPI/mpi_matrixmul_ping.png" width="80%" alt="MPI cluster connectivity"><br>
+  ![MPI cluster connectivity](MPI/mpi_matrixmul_ping.png)<br>
   <em>Figure C.1 — Master VM pinging worker1, worker2 and worker3 (4/4 packets received, 0 % loss, sub-millisecond RTT).</em>
 </p>
 
 <p align="center">
-  <img src="MPI/mpi_matrixmul_send_recv.png" width="70%" alt="MPI toolchain and send\_recv test"><br>
+  ![MPI toolchain and send\_recv test](MPI/mpi_matrixmul_send_recv.png)<br>
   <em>Figure C.2 — Open MPI headers, <code>mpicc --version</code> (GCC 13.3.0), compiling the <code>send\_recv</code> test, <code>scp</code> to the workers and the <code>mpirun</code> launch.</em>
 </p>
 
 <p align="center">
-  <img src="MPI/mpi_results.png" width="90%" alt="MPI result"><br>
+  ![MPI result](MPI/mpi_results.png)<br>
   <em>Figure C.3 — Four ranks on master, worker1, worker2 and worker3, each computing 1000 rows; final result 226.167575 s, C\[0]\[0] = 4000.00.</em>
 </p>
 
@@ -640,7 +640,7 @@ Verification C\[0]\[0] = 4000.00
 ### 10.7 Screenshot
 
 <p align="center">
-  <img src="CUDA/CUDA_Result.png" width="90%" alt="CUDA compilation and result"><br>
+  ![CUDA compilation and result](CUDA/CUDA_Result.png)<br>
   <em>Figure D.1 — <code>nvcc -O2</code> compilation in the x64 Native Tools Command Prompt and CUDA output: 250 × 250 grid, 16 × 16 blocks, kernel 0.064499 s, total 0.077087 s, C\[0]\[0] = 4000.00.</em>
 </p>
 
@@ -664,35 +664,35 @@ $$
 \\text{Speedup} = \\frac{\\text{Sequential Execution Time}}{\\text{Parallel Execution Time}}
 $$
 
-Raw data: [`Result/timing\_results.csv`](results/timing_results.csv)
+Raw data: [`Result/timing\_results.csv`](Result/timing_results.csv)
 
 \---
 
 ## 12\. Performance Analysis
 
-All figures are produced by [`Scripts/generate\_graphs.py`](scripts/generate_graphs.py) (matplotlib) from `Result/timing\_results.csv`. Logarithmic axes are used wherever the values span more than three orders of magnitude.
+All figures are produced by [`Scripts/generate\_graphs.py`](Scripts/generate_graphs.py) (matplotlib) from `Result/timing\_results.csv`. Logarithmic axes are used wherever the values span more than three orders of magnitude.
 
 ### 12.1 Execution Time
 
-<p align="center"><img src="Graph/01_execution_time_comparison.png" width="85%" alt="Execution time comparison"></p>
+<p align="center">![Execution time comparison](Graph/01_execution_time_comparison.png)</p>
 
 **Analysis.** The run times span **four orders of magnitude**, from 266 s down to 0.077 s. OpenMP cuts the time by **84.6 %**. MPI saves only **15.1 %** despite using four machines. CUDA finishes the entire job, transfers included, in **77 ms**, more than three orders of magnitude faster than any CPU model.
 
 ### 12.2 Speedup
 
-<p align="center"><img src="Graph/02_speedup_comparison.png" width="85%" alt="Speedup comparison"></p>
+<p align="center">![Speedup comparison](Graph/02_speedup_comparison.png)</p>
 
 **Analysis.** The speedup ranking is **CUDA ≫ OpenMP > MPI > Sequential**. The GPU's advantage comes from its scale: 16 million lightweight threads are scheduled over thousands of CUDA cores, compared with 8 CPU threads for OpenMP and 4 processes for MPI.
 
 ### 12.3 Computational Throughput
 
-<p align="center"><img src="Graph/03_throughput_gflops.png" width="85%" alt="Throughput in GFLOP/s"></p>
+<p align="center">![Throughput in GFLOP/s](Graph/03_throughput_gflops.png)</p>
 
 **Analysis.** Throughput normalises time by the fixed work of $1.28 \\times 10^{11}$ FLOP. The sequential code sustains just **0.48 GFLOP/s**, far below the multi-GFLOP/s peak of a modern core. This shows that the naive `i-j-k` loop is **memory-bound**: column-wise access to `B` defeats the cache. The CUDA kernel reaches **≈ 1.98 TFLOP/s** even without shared-memory tiling, because the GPU's memory system and massive thread parallelism hide memory latency.
 
 ### 12.4 Scalability and Parallel Efficiency (CPU Models)
 
-<p align="center"><img src="Graph/04_parallel_efficiency.png" width="95%" alt="Parallel efficiency"></p>
+<p align="center">![Parallel efficiency](Graph/04_parallel_efficiency.png)</p>
 
 **Analysis.**
 
@@ -701,7 +701,7 @@ All figures are produced by [`Scripts/generate\_graphs.py`](scripts/generate_gra
 
 ### 12.5 Amdahl's Law and the Karp–Flatt Metric
 
-<p align="center"><img src="Graph/05_amdahl_karp_flatt.png" width="85%" alt="Amdahl and Karp-Flatt"></p>
+<p align="center">![Amdahl and Karp-Flatt](Graph/05_amdahl_karp_flatt.png)</p>
 
 The experimentally determined serial fraction (Karp–Flatt) is
 
@@ -720,7 +720,7 @@ $$
 
 ### 12.6 CUDA: Kernel vs Data-Transfer Time
 
-<p align="center"><img src="Graph/06_cuda_time_breakdown.png" width="95%" alt="CUDA time breakdown"></p>
+<p align="center">![CUDA time breakdown](Graph/06_cuda_time_breakdown.png)</p>
 
 **Analysis.** Of the 77.09 ms total, **83.7 % is computation** and **16.3 % (12.59 ms) is PCIe transfer**. The transfers move 192 MB: A and B to the device (128 MB) and C back to the host (64 MB). That is an effective rate of **≈ 15.3 GB/s**, consistent with a PCIe 3.0/4.0 ×16 link using pageable host memory.
 
@@ -728,7 +728,7 @@ Matrix multiplication has **high arithmetic intensity**: $\\mathcal{O}(N^3)$ com
 
 ### 12.7 MPI Overhead Analysis
 
-<p align="center"><img src="Graph/07_mpi_overhead_analysis.png" width="85%" alt="MPI overhead analysis"></p>
+<p align="center">![MPI overhead analysis](Graph/07_mpi_overhead_analysis.png)</p>
 
 **Analysis.** With perfect scaling, four ranks would finish in $T\_{seq}/4 = 66.6$ s. The measured 226.2 s implies about **159.5 s (71 %) of overhead**. Communication alone explains only a small part of this: about 576 MB crosses the virtual network, which takes roughly 5 s even at 1 Gbit/s. The dominant factors are most likely:
 
@@ -742,7 +742,7 @@ MPI's real strength is scaling **beyond the limits of one machine**. On a real c
 
 ### 12.8 Measured Results vs Lab-Manual Reference
 
-<p align="center"><img src="Graph/08_measured_vs_reference.png" width="85%" alt="Measured vs reference"></p>
+<p align="center">![Measured vs reference](Graph/08_measured_vs_reference.png)</p>
 
 |Model|Reference (manual)|Measured (this work)|Reference speedup|Measured speedup|
 |-|-:|-:|-:|-:|
@@ -755,7 +755,7 @@ MPI's real strength is scaling **beyond the limits of one machine**. On a real c
 
 ### 12.9 Performance Dashboard
 
-<p align="center"><img src="Graph/09_performance_dashboard.png" width="100%" alt="Performance dashboard"></p>
+<p align="center">![Performance dashboard](Graph/09_performance_dashboard.png)</p>
 
 \---
 
@@ -843,44 +843,44 @@ This experiment implemented one $4000 \\times 4000$ matrix multiplication with f
 ## 17\. Repository Structure and Reproduction
 
 ```text
-Experiment\_1/
+Experiment_1/
 ├── README.md
 ├── SequentialModeling/
-│   ├── Sequential\_Setup.png
-│   ├── Sequential\_Result.png
+│   ├── Sequential_Setup.png
+│   ├── Sequential_Result.png
 │   └── README.md
 ├── OpenMP/
 │   ├── OpenMP.png
-│   ├── OpenMP\_matrixmul\_result.png
+│   ├── OpenMP_matrixmul_result.png
 │   └── README.md
 ├── MPI/
-│   ├── mpi\_matrixmul\_ping.png
-│   ├── mpi\_matrixmul\_send\_recv.png
-│   ├── mpi\_results.png
+│   ├── mpi_matrixmul_ping.png
+│   ├── mpi_matrixmul_send_recv.png
+│   ├── mpi_results.png
 │   └── README.md
 ├── CUDA/
-│   ├── CUDA\_Result.png
+│   ├── CUDA_Result.png
 │   └── README.md
 ├── src/
-│   ├── matrix\_sequential.c
-│   ├── matrix\_openmp.c
-│   ├── matrix\_mpi.c
-│   ├── matrix\_cuda.cu
+│   ├── matrix_sequential.c
+│   ├── matrix_openmp.c
+│   ├── matrix_mpi.c
+│   ├── matrix_cuda.cu
 │   └── hosts.txt
 ├── Result/
-│   └── timing\_results.csv
+│   └── timing_results.csv
 ├── Scripts/
-│   └── generate\_graphs.py
+│   └── generate_graphs.py
 └── Graph/
-    ├── 01\_execution\_time\_comparison.png
-    ├── 02\_speedup\_comparison.png
-    ├── 03\_throughput\_gflops.png
-    ├── 04\_parallel\_efficiency.png
-    ├── 05\_amdahl\_karp\_flatt.png
-    ├── 06\_cuda\_time\_breakdown.png
-    ├── 07\_mpi\_overhead\_analysis.png
-    ├── 08\_measured\_vs\_reference.png
-    └── 09\_performance\_dashboard.png
+    ├── 01_execution_time_comparison.png
+    ├── 02_speedup_comparison.png
+    ├── 03_throughput_gflops.png
+    ├── 04_parallel_efficiency.png
+    ├── 05_amdahl_karp_flatt.png
+    ├── 06_cuda_time_breakdown.png
+    ├── 07_mpi_overhead_analysis.png
+    ├── 08_measured_vs_reference.png
+    └── 09_performance_dashboard.png
 ```
 
 **Quick reproduction:**
