@@ -673,25 +673,25 @@ All figures are produced by [`Scripts/generate_graphs.py`](scripts/generate_grap
 
 ### 12.1 Execution Time
 
-<p align="center"><img src="graphs/01_execution_time_comparison.png" width="85%" alt="Execution time comparison"></p>
+<p align="center"><img src="Graph/01_execution_time_comparison.png" width="85%" alt="Execution time comparison"></p>
 
 **Analysis.** The run times span **four orders of magnitude**, from 266 s down to 0.077 s. OpenMP cuts the time by **84.6 %**. MPI saves only **15.1 %** despite using four machines. CUDA finishes the entire job, transfers included, in **77 ms**, more than three orders of magnitude faster than any CPU model.
 
 ### 12.2 Speedup
 
-<p align="center"><img src="graphs/02_speedup_comparison.png" width="85%" alt="Speedup comparison"></p>
+<p align="center"><img src="Graph/02_speedup_comparison.png" width="85%" alt="Speedup comparison"></p>
 
 **Analysis.** The speedup ranking is **CUDA ≫ OpenMP > MPI > Sequential**. The GPU's advantage comes from its scale: 16 million lightweight threads are scheduled over thousands of CUDA cores, compared with 8 CPU threads for OpenMP and 4 processes for MPI.
 
 ### 12.3 Computational Throughput
 
-<p align="center"><img src="graphs/03_throughput_gflops.png" width="85%" alt="Throughput in GFLOP/s"></p>
+<p align="center"><img src="Graph/03_throughput_gflops.png" width="85%" alt="Throughput in GFLOP/s"></p>
 
 **Analysis.** Throughput normalises time by the fixed work of $1.28 \times 10^{11}$ FLOP. The sequential code sustains just **0.48 GFLOP/s**, far below the multi-GFLOP/s peak of a modern core. This shows that the naive `i-j-k` loop is **memory-bound**: column-wise access to `B` defeats the cache. The CUDA kernel reaches **≈ 1.98 TFLOP/s** even without shared-memory tiling, because the GPU's memory system and massive thread parallelism hide memory latency.
 
 ### 12.4 Scalability and Parallel Efficiency (CPU Models)
 
-<p align="center"><img src="graphs/04_parallel_efficiency.png" width="95%" alt="Parallel efficiency"></p>
+<p align="center"><img src="Graph/04_parallel_efficiency.png" width="95%" alt="Parallel efficiency"></p>
 
 **Analysis.**
 
@@ -700,7 +700,7 @@ All figures are produced by [`Scripts/generate_graphs.py`](scripts/generate_grap
 
 ### 12.5 Amdahl's Law and the Karp–Flatt Metric
 
-<p align="center"><img src="graphs/05_amdahl_karp_flatt.png" width="85%" alt="Amdahl and Karp-Flatt"></p>
+<p align="center"><img src="Graph/05_amdahl_karp_flatt.png" width="85%" alt="Amdahl and Karp-Flatt"></p>
 
 The experimentally determined serial fraction (Karp–Flatt) is
 
@@ -719,7 +719,7 @@ $$
 
 ### 12.6 CUDA: Kernel vs Data-Transfer Time
 
-<p align="center"><img src="graphs/06_cuda_time_breakdown.png" width="95%" alt="CUDA time breakdown"></p>
+<p align="center"><img src="Graph/06_cuda_time_breakdown.png" width="95%" alt="CUDA time breakdown"></p>
 
 **Analysis.** Of the 77.09 ms total, **83.7 % is computation** and **16.3 % (12.59 ms) is PCIe transfer**. The transfers move 192 MB: A and B to the device (128 MB) and C back to the host (64 MB). That is an effective rate of **≈ 15.3 GB/s**, consistent with a PCIe 3.0/4.0 ×16 link using pageable host memory.
 
@@ -727,7 +727,7 @@ Matrix multiplication has **high arithmetic intensity**: $\mathcal{O}(N^3)$ comp
 
 ### 12.7 MPI Overhead Analysis
 
-<p align="center"><img src="graphs/07_mpi_overhead_analysis.png" width="85%" alt="MPI overhead analysis"></p>
+<p align="center"><img src="Graph/07_mpi_overhead_analysis.png" width="85%" alt="MPI overhead analysis"></p>
 
 **Analysis.** With perfect scaling, four ranks would finish in $T_{seq}/4 = 66.6$ s. The measured 226.2 s implies about **159.5 s (71 %) of overhead**. Communication alone explains only a small part of this: about 576 MB crosses the virtual network, which takes roughly 5 s even at 1 Gbit/s. The dominant factors are most likely:
 
@@ -741,7 +741,7 @@ MPI's real strength is scaling **beyond the limits of one machine**. On a real c
 
 ### 12.8 Measured Results vs Lab-Manual Reference
 
-<p align="center"><img src="graphs/08_measured_vs_reference.png" width="85%" alt="Measured vs reference"></p>
+<p align="center"><img src="Graph/08_measured_vs_reference.png" width="85%" alt="Measured vs reference"></p>
 
 | Model | Reference (manual) | Measured (this work) | Reference speedup | Measured speedup |
 |:--|--:|--:|--:|--:|
@@ -754,7 +754,7 @@ MPI's real strength is scaling **beyond the limits of one machine**. On a real c
 
 ### 12.9 Performance Dashboard
 
-<p align="center"><img src="graphs/09_performance_dashboard.png" width="100%" alt="Performance dashboard"></p>
+<p align="center"><img src="Graph/09_performance_dashboard.png" width="100%" alt="Performance dashboard"></p>
 
 ---
 
